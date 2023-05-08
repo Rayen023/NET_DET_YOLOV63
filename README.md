@@ -8,22 +8,22 @@
 =============================================================
 
 1. Installing miniconda3 : 
-1. 1. Download the Miniconda installer to your Home directory.
+    1. Download the Miniconda installer to your Home directory.
 `wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh`
-1. 2. Install Miniconda quietly, accepting defaults, to your Home directory.
+    2. Install Miniconda quietly, accepting defaults, to your Home directory.
 `bash ~/miniconda.sh -b -p`
-1. 3. Remove the Miniconda installer from your Home directory.
+    3. Remove the Miniconda installer from your Home directory.
 `rm ~/miniconda.sh`
 ----------------------------------------------
 
 2. Activating environment :
-2. 1. activate conda for this session
+    1. activate conda for this session
 `source $HOME/miniconda3/bin/activate`
 
-2. 2. Creating environment : #Skip if env already created
+    2. Creating environment : #Skip if env already created
 `conda create --name yolo_defect --file reauirements.txt python=3.8`
 
-2. 3. Activating the environment : 
+    3. Activating the environment : 
 `conda activate yolo_defect`
 
 ----------------------------------------------
