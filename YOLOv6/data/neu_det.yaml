@@ -1,0 +1,5 @@
+train: "/home/rayen/projects/NET_DET_YOLOV63/YOLOv6/data/images/train"
+val: "/home/rayen/projects/NET_DET_YOLOV63/YOLOv6/data/images/validation"
+
+nc: 6
+names: ['pitted_surface', 'rolled-in_scale',"scratches","crazing","inclusion","patches"]
