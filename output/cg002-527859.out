@@ -1,0 +1,2514 @@
+
+Lmod is automatically replacing "intel/2020.1.217" with "gcc/9.3.0".
+
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) libfabric/1.10.1     2) openmpi/4.0.3     3) ucx/1.8.0
+
+Using 1 GPU for training... 
+training args are: Namespace(batch_size=32, bs_per_gpu=32, calib=False, check_images=False, check_labels=False, conf_file='configs/yolov6l6_finetune.py', data_path='aug-fs-metatrain/neu_det.yaml', device='0', dist_url='env://', distill=False, distill_feat=False, epochs=100, eval_final_only=False, eval_interval=20, fuse_ab=False, gpu_count=0, heavy_eval_range=50, img_size=320, local_rank=-1, name='train_6l6-fs-32-320', output_dir='results', quant=False, rank=-1, resume=False, save_ckpt_on_last_n_epoch=-1, save_dir='results/train_6l6-fs-32-320', stop_aug_last_n_epoch=15, teacher_model_path=None, temperature=20, workers=8, world_size=1, write_trainbatch_tb=False)
+
+Train: Checking formats of images with 8 process(es): 
+  0%|          | 0/60 [00:00<?, ?it/s]0 image(s) corrupted:  18%|█▊        | 11/60 [00:00<00:00, 107.61it/s]0 image(s) corrupted: 100%|██████████| 60/60 [00:00<00:00, 436.87it/s]
+Train: Checking formats of labels with 8 process(es): 
+  0%|          | 0/60 [00:00<?, ?it/s]60 label(s) found, 0 label(s) missing, 0 label(s) empty, 0 invalid label files: 100%|██████████| 60/60 [00:00<00:00, 615.96it/s]
+Train: Final numbers of valid images: 60/ labels: 60. 
+0.5s for dataset initialization.
+/gpfs/scratch/rayen/NEU_DET_YOLOV63/ENV/lib/python3.8/site-packages/torch/utils/data/dataloader.py:554: UserWarning: This DataLoader will create 8 worker processes in total. Our suggested max number of worker in current system is 1, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(_create_warning_msg(
+Val: Checking formats of images with 8 process(es): 
+  0%|          | 0/180 [00:00<?, ?it/s]0 image(s) corrupted:   1%|          | 1/180 [00:00<00:23,  7.50it/s]0 image(s) corrupted:  34%|███▍      | 61/180 [00:00<00:00, 281.98it/s]0 image(s) corrupted:  66%|██████▌   | 119/180 [00:00<00:00, 318.16it/s]0 image(s) corrupted: 100%|██████████| 180/180 [00:00<00:00, 385.98it/s]
+Val: Checking formats of labels with 8 process(es): 
+  0%|          | 0/180 [00:00<?, ?it/s]15 label(s) found, 0 label(s) missing, 0 label(s) empty, 0 invalid label files:   8%|▊         | 15/180 [00:00<00:01, 147.32it/s]113 label(s) found, 0 label(s) missing, 0 label(s) empty, 0 invalid label files:  63%|██████▎   | 113/180 [00:00<00:00, 609.31it/s]180 label(s) found, 0 label(s) missing, 0 label(s) empty, 0 invalid label files: 100%|██████████| 180/180 [00:00<00:00, 721.08it/s]
+Convert to COCO format
+  0%|          | 0/180 [00:00<?, ?it/s]100%|██████████| 180/180 [00:00<00:00, 139268.53it/s]
+Convert to COCO format finished. Resutls saved in /gpfs/scratch/rayen/NEU_DET_YOLOV63/aug-fs-metatrain/annotations/instances_validation.json
+Val: Final numbers of valid images: 180/ labels: 180. 
+1.8s for dataset initialization.
+Loading state_dict from /gpfs/scratch/rayen/NEU_DET_YOLOV63/results/train_6l6-32-32022/weights/best_ckpt.pt for fine-tuning...
+Model: Model(
+  (backbone): CSPBepBackbone_P6(
+    (stem): ConvWrapper(
+      (block): Conv(
+        (conv): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+    )
+    (ERBlock_2): Sequential(
+      (0): ConvWrapper(
+        (block): Conv(
+          (conv): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+      )
+      (1): BepC3(
+        (cv1): Conv_C3(
+          (conv): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+        (cv2): Conv_C3(
+          (conv): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+        (cv3): Conv_C3(
+          (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+        (m): RepBlock(
+          (conv1): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (block): Sequential(
+            (0): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+            (1): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (ERBlock_3): Sequential(
+      (0): ConvWrapper(
+        (block): Conv(
+          (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+          (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+      )
+      (1): BepC3(
+        (cv1): Conv_C3(
+          (conv): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+        (cv2): Conv_C3(
+          (conv): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+        (cv3): Conv_C3(
+          (conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+        (m): RepBlock(
+          (conv1): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (block): Sequential(
+            (0): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+            (1): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+            (2): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+            (3): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+            (4): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (ERBlock_4): Sequential(
+      (0): ConvWrapper(
+        (block): Conv(
+          (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+          (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+      )
+      (1): BepC3(
+        (cv1): Conv_C3(
+          (conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+        (cv2): Conv_C3(
+          (conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+        (cv3): Conv_C3(
+          (conv): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+        (m): RepBlock(
+          (conv1): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (block): Sequential(
+            (0): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+            (1): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+            (2): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+            (3): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+            (4): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+            (5): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+            (6): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+            (7): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (ERBlock_5): Sequential(
+      (0): ConvWrapper(
+        (block): Conv(
+          (conv): Conv2d(512, 768, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+          (bn): BatchNorm2d(768, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+      )
+      (1): BepC3(
+        (cv1): Conv_C3(
+          (conv): Conv2d(768, 384, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(384, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+        (cv2): Conv_C3(
+          (conv): Conv2d(768, 384, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(384, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+        (cv3): Conv_C3(
+          (conv): Conv2d(768, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(768, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+        (m): RepBlock(
+          (conv1): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(384, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(384, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (block): Sequential(
+            (0): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(384, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(384, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+            (1): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(384, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(384, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (ERBlock_6): Sequential(
+      (0): ConvWrapper(
+        (block): Conv(
+          (conv): Conv2d(768, 1024, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+          (bn): BatchNorm2d(1024, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+      )
+      (1): BepC3(
+        (cv1): Conv_C3(
+          (conv): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+        (cv2): Conv_C3(
+          (conv): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+        (cv3): Conv_C3(
+          (conv): Conv2d(1024, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(1024, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+        (m): RepBlock(
+          (conv1): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (block): Sequential(
+            (0): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+            (1): BottleRep(
+              (conv1): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+              (conv2): ConvWrapper(
+                (block): Conv(
+                  (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                  (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                  (act): SiLU(inplace=True)
+                )
+              )
+            )
+          )
+        )
+      )
+      (2): SPPF(
+        (cv1): Conv(
+          (conv): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+        (cv2): Conv(
+          (conv): Conv2d(2048, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(1024, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+          (act): SiLU(inplace=True)
+        )
+        (m): MaxPool2d(kernel_size=5, stride=1, padding=2, dilation=1, ceil_mode=False)
+      )
+    )
+  )
+  (neck): CSPRepBiFPANNeck_P6(
+    (reduce_layer0): SimConv(
+      (conv): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+      (act): ReLU(inplace=True)
+    )
+    (Bifusion0): BiFusion(
+      (cv1): SimConv(
+        (conv): Conv2d(768, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+      (cv2): SimConv(
+        (conv): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+      (cv3): SimConv(
+        (conv): Conv2d(1536, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+      (upsample): Transpose(
+        (upsample_transpose): ConvTranspose2d(512, 512, kernel_size=(2, 2), stride=(2, 2))
+      )
+      (downsample): SimConv(
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+    )
+    (Rep_p5): BepC3(
+      (cv1): Conv_C3(
+        (conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (cv2): Conv_C3(
+        (conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (cv3): Conv_C3(
+        (conv): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (m): RepBlock(
+        (conv1): BottleRep(
+          (conv1): ConvWrapper(
+            (block): Conv(
+              (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+              (act): SiLU(inplace=True)
+            )
+          )
+          (conv2): ConvWrapper(
+            (block): Conv(
+              (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+              (act): SiLU(inplace=True)
+            )
+          )
+        )
+        (block): Sequential(
+          (0): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (1): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (2): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (3): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (4): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+        )
+      )
+    )
+    (reduce_layer1): SimConv(
+      (conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+      (act): ReLU(inplace=True)
+    )
+    (Bifusion1): BiFusion(
+      (cv1): SimConv(
+        (conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+      (cv2): SimConv(
+        (conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+      (cv3): SimConv(
+        (conv): Conv2d(768, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+      (upsample): Transpose(
+        (upsample_transpose): ConvTranspose2d(256, 256, kernel_size=(2, 2), stride=(2, 2))
+      )
+      (downsample): SimConv(
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+    )
+    (Rep_p4): BepC3(
+      (cv1): Conv_C3(
+        (conv): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (cv2): Conv_C3(
+        (conv): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (cv3): Conv_C3(
+        (conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (m): RepBlock(
+        (conv1): BottleRep(
+          (conv1): ConvWrapper(
+            (block): Conv(
+              (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+              (act): SiLU(inplace=True)
+            )
+          )
+          (conv2): ConvWrapper(
+            (block): Conv(
+              (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+              (act): SiLU(inplace=True)
+            )
+          )
+        )
+        (block): Sequential(
+          (0): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (1): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (2): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (3): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (4): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+        )
+      )
+    )
+    (reduce_layer2): SimConv(
+      (conv): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+      (act): ReLU(inplace=True)
+    )
+    (Bifusion2): BiFusion(
+      (cv1): SimConv(
+        (conv): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+      (cv2): SimConv(
+        (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+      (cv3): SimConv(
+        (conv): Conv2d(384, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+      (upsample): Transpose(
+        (upsample_transpose): ConvTranspose2d(128, 128, kernel_size=(2, 2), stride=(2, 2))
+      )
+      (downsample): SimConv(
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): ReLU(inplace=True)
+      )
+    )
+    (Rep_p3): BepC3(
+      (cv1): Conv_C3(
+        (conv): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (cv2): Conv_C3(
+        (conv): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (cv3): Conv_C3(
+        (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (m): RepBlock(
+        (conv1): BottleRep(
+          (conv1): ConvWrapper(
+            (block): Conv(
+              (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+              (act): SiLU(inplace=True)
+            )
+          )
+          (conv2): ConvWrapper(
+            (block): Conv(
+              (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+              (act): SiLU(inplace=True)
+            )
+          )
+        )
+        (block): Sequential(
+          (0): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (1): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (2): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (3): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (4): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(64, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+        )
+      )
+    )
+    (downsample2): SimConv(
+      (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+      (act): ReLU(inplace=True)
+    )
+    (Rep_n4): BepC3(
+      (cv1): Conv_C3(
+        (conv): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (cv2): Conv_C3(
+        (conv): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (cv3): Conv_C3(
+        (conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (m): RepBlock(
+        (conv1): BottleRep(
+          (conv1): ConvWrapper(
+            (block): Conv(
+              (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+              (act): SiLU(inplace=True)
+            )
+          )
+          (conv2): ConvWrapper(
+            (block): Conv(
+              (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+              (act): SiLU(inplace=True)
+            )
+          )
+        )
+        (block): Sequential(
+          (0): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (1): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (2): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (3): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (4): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+        )
+      )
+    )
+    (downsample1): SimConv(
+      (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+      (act): ReLU(inplace=True)
+    )
+    (Rep_n5): BepC3(
+      (cv1): Conv_C3(
+        (conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (cv2): Conv_C3(
+        (conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (cv3): Conv_C3(
+        (conv): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (m): RepBlock(
+        (conv1): BottleRep(
+          (conv1): ConvWrapper(
+            (block): Conv(
+              (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+              (act): SiLU(inplace=True)
+            )
+          )
+          (conv2): ConvWrapper(
+            (block): Conv(
+              (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+              (act): SiLU(inplace=True)
+            )
+          )
+        )
+        (block): Sequential(
+          (0): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (1): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (2): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (3): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (4): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+        )
+      )
+    )
+    (downsample0): SimConv(
+      (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+      (act): ReLU(inplace=True)
+    )
+    (Rep_n6): BepC3(
+      (cv1): Conv_C3(
+        (conv): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (cv2): Conv_C3(
+        (conv): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (cv3): Conv_C3(
+        (conv): Conv2d(1024, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (m): RepBlock(
+        (conv1): BottleRep(
+          (conv1): ConvWrapper(
+            (block): Conv(
+              (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+              (act): SiLU(inplace=True)
+            )
+          )
+          (conv2): ConvWrapper(
+            (block): Conv(
+              (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+              (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+              (act): SiLU(inplace=True)
+            )
+          )
+        )
+        (block): Sequential(
+          (0): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (1): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (2): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (3): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+          (4): BottleRep(
+            (conv1): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+            (conv2): ConvWrapper(
+              (block): Conv(
+                (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+                (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+                (act): SiLU(inplace=True)
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+  (detect): Detect(
+    (proj_conv): Conv2d(17, 1, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (stems): ModuleList(
+      (0): Conv(
+        (conv): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (1): Conv(
+        (conv): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (2): Conv(
+        (conv): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (3): Conv(
+        (conv): Conv2d(1024, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+    )
+    (cls_convs): ModuleList(
+      (0): Conv(
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (1): Conv(
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (2): Conv(
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (3): Conv(
+        (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+    )
+    (reg_convs): ModuleList(
+      (0): Conv(
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (1): Conv(
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (2): Conv(
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+      (3): Conv(
+        (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+        (act): SiLU(inplace=True)
+      )
+    )
+    (cls_preds): ModuleList(
+      (0): Conv2d(128, 3, kernel_size=(1, 1), stride=(1, 1))
+      (1): Conv2d(256, 3, kernel_size=(1, 1), stride=(1, 1))
+      (2): Conv2d(512, 3, kernel_size=(1, 1), stride=(1, 1))
+      (3): Conv2d(1024, 3, kernel_size=(1, 1), stride=(1, 1))
+    )
+    (reg_preds): ModuleList(
+      (0): Conv2d(128, 68, kernel_size=(1, 1), stride=(1, 1))
+      (1): Conv2d(256, 68, kernel_size=(1, 1), stride=(1, 1))
+      (2): Conv2d(512, 68, kernel_size=(1, 1), stride=(1, 1))
+      (3): Conv2d(1024, 68, kernel_size=(1, 1), stride=(1, 1))
+    )
+  )
+)
+Training start...
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                           /gpfs/scratch/rayen/NEU_DET_YOLOV63/ENV/lib/python3.8/site-packages/torch/functional.py:504: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at /home/coulombc/wheels_builder/tmp.17382/python-3.8/torch/aten/src/ATen/native/TensorShape.cpp:3190.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+      0/99    0.9513     0.722     2.107:   0%|          | 0/2 [00:01<?, ?it/s]       0/99    0.9513     0.722     2.107:  50%|█████     | 1/2 [00:01<00:01,  1.      0/99     0.981    0.7556     2.089:  50%|█████     | 1/2 [00:02<00:01,  1.      0/99     0.981    0.7556     2.089: 100%|██████████| 2/2 [00:02<00:00,  1.      0/99     0.981    0.7556     2.089: 100%|██████████| 2/2 [00:02<00:00,  1.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                 1/99     1.075     0.803     2.305:   0%|          | 0/2 [00:00<?, ?it/s]       1/99     1.075     0.803     2.305:  50%|█████     | 1/2 [00:00<00:00,  2.      1/99     1.019    0.7625     2.319:  50%|█████     | 1/2 [00:00<00:00,  2.      1/99     1.019    0.7625     2.319: 100%|██████████| 2/2 [00:00<00:00,  2.      1/99     1.019    0.7625     2.319: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                 2/99     1.063     0.804     2.063:   0%|          | 0/2 [00:00<?, ?it/s]       2/99     1.063     0.804     2.063:  50%|█████     | 1/2 [00:00<00:00,  2.      2/99     1.042    0.7912      2.08:  50%|█████     | 1/2 [00:00<00:00,  2.      2/99     1.042    0.7912      2.08: 100%|██████████| 2/2 [00:00<00:00,  2.      2/99     1.042    0.7912      2.08: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                 3/99    0.9498    0.7441     2.162:   0%|          | 0/2 [00:00<?, ?it/s]       3/99    0.9498    0.7441     2.162:  50%|█████     | 1/2 [00:00<00:00,  2.      3/99    0.9746    0.7616     2.082:  50%|█████     | 1/2 [00:00<00:00,  2.      3/99    0.9746    0.7616     2.082: 100%|██████████| 2/2 [00:00<00:00,  2.      3/99    0.9746    0.7616     2.082: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                 4/99    0.6655    0.6715     1.498:   0%|          | 0/2 [00:00<?, ?it/s]       4/99    0.6655    0.6715     1.498:  50%|█████     | 1/2 [00:00<00:00,  2.      4/99    0.6632    0.6778     1.504:  50%|█████     | 1/2 [00:00<00:00,  2.      4/99    0.6632    0.6778     1.504: 100%|██████████| 2/2 [00:00<00:00,  2.      4/99    0.6632    0.6778     1.504: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                 5/99    0.5745     0.614      1.54:   0%|          | 0/2 [00:00<?, ?it/s]       5/99    0.5745     0.614      1.54:  50%|█████     | 1/2 [00:00<00:00,  2.      5/99    0.6174    0.6529     1.474:  50%|█████     | 1/2 [00:00<00:00,  2.      5/99    0.6174    0.6529     1.474: 100%|██████████| 2/2 [00:00<00:00,  2.      5/99    0.6174    0.6529     1.474: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                 6/99    0.6744    0.6631     1.526:   0%|          | 0/2 [00:00<?, ?it/s]       6/99    0.6744    0.6631     1.526:  50%|█████     | 1/2 [00:00<00:00,  2.      6/99    0.6504    0.6503     1.526:  50%|█████     | 1/2 [00:00<00:00,  2.      6/99    0.6504    0.6503     1.526: 100%|██████████| 2/2 [00:00<00:00,  2.      6/99    0.6504    0.6503     1.526: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                 7/99    0.6547    0.6779     1.561:   0%|          | 0/2 [00:00<?, ?it/s]       7/99    0.6547    0.6779     1.561:  50%|█████     | 1/2 [00:00<00:00,  2.      7/99    0.6508    0.6608     1.501:  50%|█████     | 1/2 [00:00<00:00,  2.      7/99    0.6508    0.6608     1.501: 100%|██████████| 2/2 [00:00<00:00,  2.      7/99    0.6508    0.6608     1.501: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                 8/99     0.647    0.6858     1.521:   0%|          | 0/2 [00:00<?, ?it/s]       8/99     0.647    0.6858     1.521:  50%|█████     | 1/2 [00:00<00:00,  2.      8/99    0.6834    0.6932     1.518:  50%|█████     | 1/2 [00:00<00:00,  2.      8/99    0.6834    0.6932     1.518: 100%|██████████| 2/2 [00:00<00:00,  2.      8/99    0.6834    0.6932     1.518: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                 9/99    0.6595    0.6806     1.395:   0%|          | 0/2 [00:00<?, ?it/s]       9/99    0.6595    0.6806     1.395:  50%|█████     | 1/2 [00:00<00:00,  2.      9/99     0.659     0.684     1.443:  50%|█████     | 1/2 [00:00<00:00,  2.      9/99     0.659     0.684     1.443: 100%|██████████| 2/2 [00:00<00:00,  2.      9/99     0.659     0.684     1.443: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                10/99    0.6551    0.6868      1.52:   0%|          | 0/2 [00:00<?, ?it/s]      10/99    0.6551    0.6868      1.52:  50%|█████     | 1/2 [00:00<00:00,  2.     10/99    0.6517    0.6946     1.502:  50%|█████     | 1/2 [00:00<00:00,  2.     10/99    0.6517    0.6946     1.502: 100%|██████████| 2/2 [00:00<00:00,  2.     10/99    0.6517    0.6946     1.502: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                11/99    0.5816    0.6532     1.533:   0%|          | 0/2 [00:00<?, ?it/s]      11/99    0.5816    0.6532     1.533:  50%|█████     | 1/2 [00:00<00:00,  2.     11/99    0.5967    0.6481     1.495:  50%|█████     | 1/2 [00:00<00:00,  2.     11/99    0.5967    0.6481     1.495: 100%|██████████| 2/2 [00:00<00:00,  2.     11/99    0.5967    0.6481     1.495: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                12/99    0.6281    0.6552     1.554:   0%|          | 0/2 [00:00<?, ?it/s]      12/99    0.6281    0.6552     1.554:  50%|█████     | 1/2 [00:00<00:00,  2.     12/99    0.6454    0.6713     1.526:  50%|█████     | 1/2 [00:00<00:00,  2.     12/99    0.6454    0.6713     1.526: 100%|██████████| 2/2 [00:00<00:00,  2.     12/99    0.6454    0.6713     1.526: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                13/99    0.7152    0.7075      1.46:   0%|          | 0/2 [00:00<?, ?it/s]      13/99    0.7152    0.7075      1.46:  50%|█████     | 1/2 [00:00<00:00,  2.     13/99    0.6671    0.6875     1.476:  50%|█████     | 1/2 [00:00<00:00,  2.     13/99    0.6671    0.6875     1.476: 100%|██████████| 2/2 [00:00<00:00,  2.     13/99    0.6671    0.6875     1.476: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                14/99    0.6571    0.6668     1.395:   0%|          | 0/2 [00:00<?, ?it/s]      14/99    0.6571    0.6668     1.395:  50%|█████     | 1/2 [00:00<00:00,  2.     14/99    0.6473    0.6613      1.45:  50%|█████     | 1/2 [00:00<00:00,  2.     14/99    0.6473    0.6613      1.45: 100%|██████████| 2/2 [00:00<00:00,  2.     14/99    0.6473    0.6613      1.45: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                15/99    0.6495    0.6526     1.449:   0%|          | 0/2 [00:00<?, ?it/s]      15/99    0.6495    0.6526     1.449:  50%|█████     | 1/2 [00:00<00:00,  2.     15/99    0.6499    0.6483     1.438:  50%|█████     | 1/2 [00:00<00:00,  2.     15/99    0.6499    0.6483     1.438: 100%|██████████| 2/2 [00:00<00:00,  2.     15/99    0.6499    0.6483     1.438: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                16/99    0.5945    0.6505     1.439:   0%|          | 0/2 [00:00<?, ?it/s]      16/99    0.5945    0.6505     1.439:  50%|█████     | 1/2 [00:00<00:00,  2.     16/99    0.6204    0.6395      1.42:  50%|█████     | 1/2 [00:00<00:00,  2.     16/99    0.6204    0.6395      1.42: 100%|██████████| 2/2 [00:00<00:00,  2.     16/99    0.6204    0.6395      1.42: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                17/99    0.6068    0.6676     1.442:   0%|          | 0/2 [00:00<?, ?it/s]      17/99    0.6068    0.6676     1.442:  50%|█████     | 1/2 [00:00<00:00,  2.     17/99     0.626    0.6685     1.472:  50%|█████     | 1/2 [00:00<00:00,  2.     17/99     0.626    0.6685     1.472: 100%|██████████| 2/2 [00:00<00:00,  2.     17/99     0.626    0.6685     1.472: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                18/99    0.6646    0.6582     1.359:   0%|          | 0/2 [00:00<?, ?it/s]      18/99    0.6646    0.6582     1.359:  50%|█████     | 1/2 [00:00<00:00,  2.     18/99    0.6495     0.666     1.381:  50%|█████     | 1/2 [00:00<00:00,  2.     18/99    0.6495     0.666     1.381: 100%|██████████| 2/2 [00:00<00:00,  2.     18/99    0.6495     0.666     1.381: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                19/99    0.6421    0.6571     1.436:   0%|          | 0/2 [00:00<?, ?it/s]      19/99    0.6421    0.6571     1.436:  50%|█████     | 1/2 [00:00<00:00,  2.     19/99     0.617    0.6498     1.446:  50%|█████     | 1/2 [00:00<00:00,  2.     19/99     0.617    0.6498     1.446: 100%|██████████| 2/2 [00:00<00:00,  2.     19/99     0.617    0.6498     1.446: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.12s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.14s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.07s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.09s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 19 | mAP@0.5: 0.17908622751961492 | mAP@0.50:0.95: 0.08231378989040915
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.32s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.67s).
+Accumulating evaluation results...
+DONE (t=0.30s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.082
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.179
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.063
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.005
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.089
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.133
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.092
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.231
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.353
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.500
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.403
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.381
+  0%|          | 0/2 [00:00<?, ?it/s]                                                20/99    0.6204    0.6445     1.458:   0%|          | 0/2 [00:00<?, ?it/s]      20/99    0.6204    0.6445     1.458:  50%|█████     | 1/2 [00:00<00:00,  2.     20/99    0.6012    0.6418     1.396:  50%|█████     | 1/2 [00:00<00:00,  2.     20/99    0.6012    0.6418     1.396: 100%|██████████| 2/2 [00:00<00:00,  2.     20/99    0.6012    0.6418     1.396: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                21/99     0.652    0.6514     1.275:   0%|          | 0/2 [00:00<?, ?it/s]      21/99     0.652    0.6514     1.275:  50%|█████     | 1/2 [00:00<00:00,  2.     21/99    0.6261    0.6251     1.319:  50%|█████     | 1/2 [00:00<00:00,  2.     21/99    0.6261    0.6251     1.319: 100%|██████████| 2/2 [00:00<00:00,  2.     21/99    0.6261    0.6251     1.319: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                22/99    0.6175    0.6157     1.365:   0%|          | 0/2 [00:00<?, ?it/s]      22/99    0.6175    0.6157     1.365:  50%|█████     | 1/2 [00:00<00:00,  2.     22/99     0.626    0.6525       1.4:  50%|█████     | 1/2 [00:00<00:00,  2.     22/99     0.626    0.6525       1.4: 100%|██████████| 2/2 [00:00<00:00,  2.     22/99     0.626    0.6525       1.4: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                23/99    0.6074    0.6503     1.403:   0%|          | 0/2 [00:00<?, ?it/s]      23/99    0.6074    0.6503     1.403:  50%|█████     | 1/2 [00:00<00:00,  2.     23/99    0.6034     0.648     1.434:  50%|█████     | 1/2 [00:00<00:00,  2.     23/99    0.6034     0.648     1.434: 100%|██████████| 2/2 [00:00<00:00,  2.     23/99    0.6034     0.648     1.434: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                24/99    0.6071    0.6869     1.532:   0%|          | 0/2 [00:00<?, ?it/s]      24/99    0.6071    0.6869     1.532:  50%|█████     | 1/2 [00:00<00:00,  2.     24/99     0.613    0.6773     1.422:  50%|█████     | 1/2 [00:00<00:00,  2.     24/99     0.613    0.6773     1.422: 100%|██████████| 2/2 [00:00<00:00,  2.     24/99     0.613    0.6773     1.422: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                25/99    0.5875    0.6372     1.483:   0%|          | 0/2 [00:00<?, ?it/s]      25/99    0.5875    0.6372     1.483:  50%|█████     | 1/2 [00:00<00:00,  2.     25/99    0.6056    0.6492     1.437:  50%|█████     | 1/2 [00:00<00:00,  2.     25/99    0.6056    0.6492     1.437: 100%|██████████| 2/2 [00:00<00:00,  2.     25/99    0.6056    0.6492     1.437: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                26/99    0.5196    0.6182     1.507:   0%|          | 0/2 [00:00<?, ?it/s]      26/99    0.5196    0.6182     1.507:  50%|█████     | 1/2 [00:00<00:00,  2.     26/99    0.5399    0.6373     1.462:  50%|█████     | 1/2 [00:00<00:00,  2.     26/99    0.5399    0.6373     1.462: 100%|██████████| 2/2 [00:00<00:00,  2.     26/99    0.5399    0.6373     1.462: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                27/99     0.611     0.633     1.254:   0%|          | 0/2 [00:00<?, ?it/s]      27/99     0.611     0.633     1.254:  50%|█████     | 1/2 [00:00<00:00,  2.     27/99    0.6352      0.65     1.288:  50%|█████     | 1/2 [00:00<00:00,  2.     27/99    0.6352      0.65     1.288: 100%|██████████| 2/2 [00:00<00:00,  2.     27/99    0.6352      0.65     1.288: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                28/99     0.608    0.6418     1.399:   0%|          | 0/2 [00:00<?, ?it/s]      28/99     0.608    0.6418     1.399:  50%|█████     | 1/2 [00:00<00:00,  2.     28/99    0.5835    0.6401     1.411:  50%|█████     | 1/2 [00:00<00:00,  2.     28/99    0.5835    0.6401     1.411: 100%|██████████| 2/2 [00:00<00:00,  2.     28/99    0.5835    0.6401     1.411: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                29/99    0.6137    0.6035     1.271:   0%|          | 0/2 [00:00<?, ?it/s]      29/99    0.6137    0.6035     1.271:  50%|█████     | 1/2 [00:00<00:00,  2.     29/99    0.5986    0.6122     1.275:  50%|█████     | 1/2 [00:00<00:00,  2.     29/99    0.5986    0.6122     1.275: 100%|██████████| 2/2 [00:00<00:00,  2.     29/99    0.5986    0.6122     1.275: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                30/99     0.614     0.658     1.349:   0%|          | 0/2 [00:00<?, ?it/s]      30/99     0.614     0.658     1.349:  50%|█████     | 1/2 [00:00<00:00,  2.     30/99    0.6251    0.6517     1.343:  50%|█████     | 1/2 [00:00<00:00,  2.     30/99    0.6251    0.6517     1.343: 100%|██████████| 2/2 [00:00<00:00,  2.     30/99    0.6251    0.6517     1.343: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                31/99    0.6635     0.656     1.351:   0%|          | 0/2 [00:00<?, ?it/s]      31/99    0.6635     0.656     1.351:  50%|█████     | 1/2 [00:00<00:00,  2.     31/99    0.6032    0.6327     1.368:  50%|█████     | 1/2 [00:00<00:00,  2.     31/99    0.6032    0.6327     1.368: 100%|██████████| 2/2 [00:00<00:00,  2.     31/99    0.6032    0.6327     1.368: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                32/99    0.5885    0.6311     1.383:   0%|          | 0/2 [00:00<?, ?it/s]      32/99    0.5885    0.6311     1.383:  50%|█████     | 1/2 [00:00<00:00,  2.     32/99    0.5928    0.6339     1.333:  50%|█████     | 1/2 [00:00<00:00,  2.     32/99    0.5928    0.6339     1.333: 100%|██████████| 2/2 [00:00<00:00,  2.     32/99    0.5928    0.6339     1.333: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                33/99    0.5999    0.6081      1.31:   0%|          | 0/2 [00:00<?, ?it/s]      33/99    0.5999    0.6081      1.31:  50%|█████     | 1/2 [00:00<00:00,  2.     33/99    0.6055      0.62     1.252:  50%|█████     | 1/2 [00:00<00:00,  2.     33/99    0.6055      0.62     1.252: 100%|██████████| 2/2 [00:00<00:00,  2.     33/99    0.6055      0.62     1.252: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                34/99    0.5277    0.6259     1.341:   0%|          | 0/2 [00:00<?, ?it/s]      34/99    0.5277    0.6259     1.341:  50%|█████     | 1/2 [00:00<00:00,  2.     34/99    0.5323    0.6127     1.357:  50%|█████     | 1/2 [00:00<00:00,  2.     34/99    0.5323    0.6127     1.357: 100%|██████████| 2/2 [00:00<00:00,  2.     34/99    0.5323    0.6127     1.357: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                35/99    0.5932    0.6196     1.236:   0%|          | 0/2 [00:00<?, ?it/s]      35/99    0.5932    0.6196     1.236:  50%|█████     | 1/2 [00:00<00:00,  2.     35/99    0.5872    0.6342     1.278:  50%|█████     | 1/2 [00:00<00:00,  2.     35/99    0.5872    0.6342     1.278: 100%|██████████| 2/2 [00:00<00:00,  2.     35/99    0.5872    0.6342     1.278: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                36/99    0.6477    0.6259     1.275:   0%|          | 0/2 [00:00<?, ?it/s]      36/99    0.6477    0.6259     1.275:  50%|█████     | 1/2 [00:00<00:00,  2.     36/99    0.5861    0.6019     1.266:  50%|█████     | 1/2 [00:00<00:00,  2.     36/99    0.5861    0.6019     1.266: 100%|██████████| 2/2 [00:00<00:00,  2.     36/99    0.5861    0.6019     1.266: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                37/99    0.5407    0.6195     1.276:   0%|          | 0/2 [00:00<?, ?it/s]      37/99    0.5407    0.6195     1.276:  50%|█████     | 1/2 [00:00<00:00,  2.     37/99    0.5317    0.6036     1.303:  50%|█████     | 1/2 [00:00<00:00,  2.     37/99    0.5317    0.6036     1.303: 100%|██████████| 2/2 [00:00<00:00,  2.     37/99    0.5317    0.6036     1.303: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                38/99    0.5804    0.6606      1.43:   0%|          | 0/2 [00:00<?, ?it/s]      38/99    0.5804    0.6606      1.43:  50%|█████     | 1/2 [00:00<00:00,  2.     38/99     0.584     0.646     1.334:  50%|█████     | 1/2 [00:00<00:00,  2.     38/99     0.584     0.646     1.334: 100%|██████████| 2/2 [00:00<00:00,  2.     38/99     0.584     0.646     1.334: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                39/99    0.6152    0.6699     1.264:   0%|          | 0/2 [00:00<?, ?it/s]      39/99    0.6152    0.6699     1.264:  50%|█████     | 1/2 [00:00<00:00,  2.     39/99     0.594     0.628     1.239:  50%|█████     | 1/2 [00:00<00:00,  2.     39/99     0.594     0.628     1.239: 100%|██████████| 2/2 [00:00<00:00,  2.     39/99     0.594     0.628     1.239: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.21s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.25s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.14s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.17s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 39 | mAP@0.5: 0.25333707912222164 | mAP@0.50:0.95: 0.12234375299814884
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.36s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.89s).
+Accumulating evaluation results...
+DONE (t=0.34s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.122
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.253
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.104
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.014
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.122
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.168
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.124
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.329
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.485
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.400
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.460
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.522
+  0%|          | 0/2 [00:00<?, ?it/s]                                                40/99    0.6543    0.6792     1.289:   0%|          | 0/2 [00:00<?, ?it/s]      40/99    0.6543    0.6792     1.289:  50%|█████     | 1/2 [00:00<00:00,  2.     40/99     0.619    0.6697      1.33:  50%|█████     | 1/2 [00:00<00:00,  2.     40/99     0.619    0.6697      1.33: 100%|██████████| 2/2 [00:00<00:00,  2.     40/99     0.619    0.6697      1.33: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                41/99    0.5559    0.6263     1.285:   0%|          | 0/2 [00:00<?, ?it/s]      41/99    0.5559    0.6263     1.285:  50%|█████     | 1/2 [00:00<00:00,  2.     41/99    0.5414     0.625     1.335:  50%|█████     | 1/2 [00:00<00:00,  2.     41/99    0.5414     0.625     1.335: 100%|██████████| 2/2 [00:00<00:00,  2.     41/99    0.5414     0.625     1.335: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                42/99    0.5692    0.6016     1.244:   0%|          | 0/2 [00:00<?, ?it/s]      42/99    0.5692    0.6016     1.244:  50%|█████     | 1/2 [00:00<00:00,  2.     42/99    0.5657    0.6012     1.231:  50%|█████     | 1/2 [00:00<00:00,  2.     42/99    0.5657    0.6012     1.231: 100%|██████████| 2/2 [00:00<00:00,  2.     42/99    0.5657    0.6012     1.231: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                43/99    0.5282    0.5879     1.249:   0%|          | 0/2 [00:00<?, ?it/s]      43/99    0.5282    0.5879     1.249:  50%|█████     | 1/2 [00:00<00:00,  2.     43/99    0.5755    0.6172     1.283:  50%|█████     | 1/2 [00:00<00:00,  2.     43/99    0.5755    0.6172     1.283: 100%|██████████| 2/2 [00:00<00:00,  2.     43/99    0.5755    0.6172     1.283: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                44/99     0.561      0.61     1.332:   0%|          | 0/2 [00:00<?, ?it/s]      44/99     0.561      0.61     1.332:  50%|█████     | 1/2 [00:00<00:00,  2.     44/99    0.5433    0.5864     1.249:  50%|█████     | 1/2 [00:00<00:00,  2.     44/99    0.5433    0.5864     1.249: 100%|██████████| 2/2 [00:00<00:00,  2.     44/99    0.5433    0.5864     1.249: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                45/99    0.5642    0.6185      1.22:   0%|          | 0/2 [00:00<?, ?it/s]      45/99    0.5642    0.6185      1.22:  50%|█████     | 1/2 [00:00<00:00,  1.     45/99      0.54    0.6135     1.248:  50%|█████     | 1/2 [00:00<00:00,  1.     45/99      0.54    0.6135     1.248: 100%|██████████| 2/2 [00:00<00:00,  2.     45/99      0.54    0.6135     1.248: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                46/99     0.555    0.6399     1.325:   0%|          | 0/2 [00:00<?, ?it/s]      46/99     0.555    0.6399     1.325:  50%|█████     | 1/2 [00:00<00:00,  2.     46/99    0.5619    0.6189     1.287:  50%|█████     | 1/2 [00:00<00:00,  2.     46/99    0.5619    0.6189     1.287: 100%|██████████| 2/2 [00:00<00:00,  2.     46/99    0.5619    0.6189     1.287: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                47/99    0.5966    0.6187     1.176:   0%|          | 0/2 [00:00<?, ?it/s]      47/99    0.5966    0.6187     1.176:  50%|█████     | 1/2 [00:00<00:00,  2.     47/99    0.5943    0.6179     1.189:  50%|█████     | 1/2 [00:00<00:00,  2.     47/99    0.5943    0.6179     1.189: 100%|██████████| 2/2 [00:00<00:00,  2.     47/99    0.5943    0.6179     1.189: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                48/99    0.5043    0.6141     1.272:   0%|          | 0/2 [00:00<?, ?it/s]      48/99    0.5043    0.6141     1.272:  50%|█████     | 1/2 [00:00<00:00,  2.     48/99    0.4995    0.6011     1.221:  50%|█████     | 1/2 [00:00<00:00,  2.     48/99    0.4995    0.6011     1.221: 100%|██████████| 2/2 [00:00<00:00,  2.     48/99    0.4995    0.6011     1.221: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                49/99    0.5562    0.6497     1.267:   0%|          | 0/2 [00:00<?, ?it/s]      49/99    0.5562    0.6497     1.267:  50%|█████     | 1/2 [00:00<00:00,  2.     49/99    0.5536    0.6447     1.257:  50%|█████     | 1/2 [00:00<00:00,  2.     49/99    0.5536    0.6447     1.257: 100%|██████████| 2/2 [00:00<00:00,  2.     49/99    0.5536    0.6447     1.257: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                50/99    0.5537    0.6137     1.196:   0%|          | 0/2 [00:00<?, ?it/s]      50/99    0.5537    0.6137     1.196:  50%|█████     | 1/2 [00:00<00:00,  2.     50/99    0.5227     0.598     1.198:  50%|█████     | 1/2 [00:00<00:00,  2.     50/99    0.5227     0.598     1.198: 100%|██████████| 2/2 [00:00<00:00,  2.     50/99    0.5227     0.598     1.198: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.23s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.27s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.16s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.19s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 50 | mAP@0.5: 0.29709370416178604 | mAP@0.50:0.95: 0.1441544661335282
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.36s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.95s).
+Accumulating evaluation results...
+DONE (t=0.34s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.144
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.297
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.121
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.022
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.135
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.196
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.157
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.367
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.514
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.456
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.489
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.541
+  0%|          | 0/2 [00:00<?, ?it/s]                                                51/99    0.4932    0.5911     1.186:   0%|          | 0/2 [00:00<?, ?it/s]      51/99    0.4932    0.5911     1.186:  50%|█████     | 1/2 [00:00<00:00,  2.     51/99    0.5204    0.6049     1.212:  50%|█████     | 1/2 [00:00<00:00,  2.     51/99    0.5204    0.6049     1.212: 100%|██████████| 2/2 [00:00<00:00,  2.     51/99    0.5204    0.6049     1.212: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                52/99    0.5388    0.6015     1.214:   0%|          | 0/2 [00:00<?, ?it/s]      52/99    0.5388    0.6015     1.214:  50%|█████     | 1/2 [00:00<00:00,  2.     52/99    0.5336    0.6101     1.224:  50%|█████     | 1/2 [00:00<00:00,  2.     52/99    0.5336    0.6101     1.224: 100%|██████████| 2/2 [00:00<00:00,  2.     52/99    0.5336    0.6101     1.224: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                53/99    0.5067    0.6195     1.284:   0%|          | 0/2 [00:00<?, ?it/s]      53/99    0.5067    0.6195     1.284:  50%|█████     | 1/2 [00:00<00:00,  2.     53/99     0.527    0.6215     1.241:  50%|█████     | 1/2 [00:00<00:00,  2.     53/99     0.527    0.6215     1.241: 100%|██████████| 2/2 [00:00<00:00,  2.     53/99     0.527    0.6215     1.241: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.26s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.24s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.17s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.20s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 53 | mAP@0.5: 0.3084932085313675 | mAP@0.50:0.95: 0.1518688147975195
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.36s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.94s).
+Accumulating evaluation results...
+DONE (t=0.34s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.152
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.308
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.141
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.023
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.140
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.206
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.154
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.370
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.521
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.650
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.492
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.548
+  0%|          | 0/2 [00:00<?, ?it/s]                                                54/99    0.5176     0.589     1.184:   0%|          | 0/2 [00:00<?, ?it/s]      54/99    0.5176     0.589     1.184:  50%|█████     | 1/2 [00:00<00:00,  2.     54/99    0.5402    0.6119     1.171:  50%|█████     | 1/2 [00:00<00:00,  2.     54/99    0.5402    0.6119     1.171: 100%|██████████| 2/2 [00:00<00:00,  2.     54/99    0.5402    0.6119     1.171: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                55/99    0.5554    0.6353     1.164:   0%|          | 0/2 [00:00<?, ?it/s]      55/99    0.5554    0.6353     1.164:  50%|█████     | 1/2 [00:00<00:00,  2.     55/99    0.5587    0.6354     1.183:  50%|█████     | 1/2 [00:00<00:00,  2.     55/99    0.5587    0.6354     1.183: 100%|██████████| 2/2 [00:00<00:00,  2.     55/99    0.5587    0.6354     1.183: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                56/99     0.525    0.6419     1.248:   0%|          | 0/2 [00:00<?, ?it/s]      56/99     0.525    0.6419     1.248:  50%|█████     | 1/2 [00:00<00:00,  2.     56/99    0.5273    0.6203     1.211:  50%|█████     | 1/2 [00:00<00:00,  2.     56/99    0.5273    0.6203     1.211: 100%|██████████| 2/2 [00:00<00:00,  2.     56/99    0.5273    0.6203     1.211: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.23s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.23s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.16s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.18s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 56 | mAP@0.5: 0.31496595647798054 | mAP@0.50:0.95: 0.15401340505627967
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.34s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.96s).
+Accumulating evaluation results...
+DONE (t=0.34s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.154
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.315
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.139
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.028
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.142
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.205
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.158
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.371
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.509
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.406
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.479
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.531
+  0%|          | 0/2 [00:00<?, ?it/s]                                                57/99    0.5203    0.5968     1.173:   0%|          | 0/2 [00:00<?, ?it/s]      57/99    0.5203    0.5968     1.173:  50%|█████     | 1/2 [00:00<00:00,  2.     57/99    0.5211    0.5959     1.162:  50%|█████     | 1/2 [00:00<00:00,  2.     57/99    0.5211    0.5959     1.162: 100%|██████████| 2/2 [00:00<00:00,  2.     57/99    0.5211    0.5959     1.162: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                58/99    0.5239    0.6039     1.161:   0%|          | 0/2 [00:00<?, ?it/s]      58/99    0.5239    0.6039     1.161:  50%|█████     | 1/2 [00:00<00:00,  2.     58/99     0.531    0.5976     1.164:  50%|█████     | 1/2 [00:00<00:00,  2.     58/99     0.531    0.5976     1.164: 100%|██████████| 2/2 [00:00<00:00,  2.     58/99     0.531    0.5976     1.164: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                59/99    0.5432    0.6117     1.169:   0%|          | 0/2 [00:00<?, ?it/s]      59/99    0.5432    0.6117     1.169:  50%|█████     | 1/2 [00:00<00:00,  2.     59/99    0.5424    0.6171     1.175:  50%|█████     | 1/2 [00:00<00:00,  2.     59/99    0.5424    0.6171     1.175: 100%|██████████| 2/2 [00:00<00:00,  2.     59/99    0.5424    0.6171     1.175: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.22s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.26s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.16s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.19s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 59 | mAP@0.5: 0.32380094561128836 | mAP@0.50:0.95: 0.1586467438145395
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.34s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.94s).
+Accumulating evaluation results...
+DONE (t=0.34s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.159
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.324
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.143
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.032
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.146
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.210
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.167
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.379
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.523
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.406
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.502
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.549
+  0%|          | 0/2 [00:00<?, ?it/s]                                                60/99    0.5718    0.6242     1.199:   0%|          | 0/2 [00:00<?, ?it/s]      60/99    0.5718    0.6242     1.199:  50%|█████     | 1/2 [00:00<00:00,  2.     60/99    0.5749    0.6094     1.171:  50%|█████     | 1/2 [00:00<00:00,  2.     60/99    0.5749    0.6094     1.171: 100%|██████████| 2/2 [00:00<00:00,  2.     60/99    0.5749    0.6094     1.171: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                61/99    0.5138    0.6083     1.234:   0%|          | 0/2 [00:00<?, ?it/s]      61/99    0.5138    0.6083     1.234:  50%|█████     | 1/2 [00:00<00:00,  2.     61/99    0.5336    0.5999     1.187:  50%|█████     | 1/2 [00:00<00:00,  2.     61/99    0.5336    0.5999     1.187: 100%|██████████| 2/2 [00:00<00:00,  2.     61/99    0.5336    0.5999     1.187: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                62/99    0.5634    0.6714     1.211:   0%|          | 0/2 [00:00<?, ?it/s]      62/99    0.5634    0.6714     1.211:  50%|█████     | 1/2 [00:00<00:00,  2.     62/99    0.5653    0.6284     1.153:  50%|█████     | 1/2 [00:00<00:00,  2.     62/99    0.5653    0.6284     1.153: 100%|██████████| 2/2 [00:00<00:00,  2.     62/99    0.5653    0.6284     1.153: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.22s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.22s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.16s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.18s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 62 | mAP@0.5: 0.3335752267722284 | mAP@0.50:0.95: 0.1646361959672417
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.35s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.94s).
+Accumulating evaluation results...
+DONE (t=0.33s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.165
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.334
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.143
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.033
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.148
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.215
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.174
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.391
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.524
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.406
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.498
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.550
+  0%|          | 0/2 [00:00<?, ?it/s]                                                63/99    0.5279    0.6271     1.139:   0%|          | 0/2 [00:00<?, ?it/s]      63/99    0.5279    0.6271     1.139:  50%|█████     | 1/2 [00:00<00:00,  2.     63/99    0.5096    0.6199     1.173:  50%|█████     | 1/2 [00:00<00:00,  2.     63/99    0.5096    0.6199     1.173: 100%|██████████| 2/2 [00:00<00:00,  2.     63/99    0.5096    0.6199     1.173: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                64/99     0.516     0.606     1.165:   0%|          | 0/2 [00:00<?, ?it/s]      64/99     0.516     0.606     1.165:  50%|█████     | 1/2 [00:00<00:00,  2.     64/99    0.5096    0.5982     1.167:  50%|█████     | 1/2 [00:00<00:00,  2.     64/99    0.5096    0.5982     1.167: 100%|██████████| 2/2 [00:00<00:00,  2.     64/99    0.5096    0.5982     1.167: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                65/99    0.5111    0.6158     1.139:   0%|          | 0/2 [00:00<?, ?it/s]      65/99    0.5111    0.6158     1.139:  50%|█████     | 1/2 [00:00<00:00,  2.     65/99    0.5434     0.633     1.191:  50%|█████     | 1/2 [00:00<00:00,  2.     65/99    0.5434     0.633     1.191: 100%|██████████| 2/2 [00:00<00:00,  2.     65/99    0.5434     0.633     1.191: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.22s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.26s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.15s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.18s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 65 | mAP@0.5: 0.3410215813364615 | mAP@0.50:0.95: 0.16816611863708597
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.35s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.95s).
+Accumulating evaluation results...
+DONE (t=0.33s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.168
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.341
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.156
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.037
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.150
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.222
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.173
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.396
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.524
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.411
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.475
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.553
+  0%|          | 0/2 [00:00<?, ?it/s]                                                66/99    0.5609    0.6087     1.157:   0%|          | 0/2 [00:00<?, ?it/s]      66/99    0.5609    0.6087     1.157:  50%|█████     | 1/2 [00:00<00:00,  2.     66/99    0.5627    0.6067     1.142:  50%|█████     | 1/2 [00:00<00:00,  2.     66/99    0.5627    0.6067     1.142: 100%|██████████| 2/2 [00:00<00:00,  2.     66/99    0.5627    0.6067     1.142: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                67/99    0.4854    0.5904     1.182:   0%|          | 0/2 [00:00<?, ?it/s]      67/99    0.4854    0.5904     1.182:  50%|█████     | 1/2 [00:00<00:00,  2.     67/99    0.4837     0.591     1.162:  50%|█████     | 1/2 [00:00<00:00,  2.     67/99    0.4837     0.591     1.162: 100%|██████████| 2/2 [00:00<00:00,  2.     67/99    0.4837     0.591     1.162: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                68/99    0.5215     0.587     1.167:   0%|          | 0/2 [00:00<?, ?it/s]      68/99    0.5215     0.587     1.167:  50%|█████     | 1/2 [00:00<00:00,  2.     68/99    0.5352    0.6018     1.175:  50%|█████     | 1/2 [00:00<00:00,  2.     68/99    0.5352    0.6018     1.175: 100%|██████████| 2/2 [00:00<00:00,  2.     68/99    0.5352    0.6018     1.175: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.27s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.24s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.19s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.21s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 68 | mAP@0.5: 0.34831134558561305 | mAP@0.50:0.95: 0.17287258978087297
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.36s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.94s).
+Accumulating evaluation results...
+DONE (t=0.34s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.173
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.348
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.164
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.037
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.151
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.229
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.177
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.403
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.537
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.417
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.500
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.564
+  0%|          | 0/2 [00:00<?, ?it/s]                                                69/99     0.585    0.5918     1.109:   0%|          | 0/2 [00:00<?, ?it/s]      69/99     0.585    0.5918     1.109:  50%|█████     | 1/2 [00:00<00:00,  2.     69/99    0.5322    0.5736     1.072:  50%|█████     | 1/2 [00:00<00:00,  2.     69/99    0.5322    0.5736     1.072: 100%|██████████| 2/2 [00:00<00:00,  2.     69/99    0.5322    0.5736     1.072: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                70/99    0.5351    0.6443     1.165:   0%|          | 0/2 [00:00<?, ?it/s]      70/99    0.5351    0.6443     1.165:  50%|█████     | 1/2 [00:00<00:00,  2.     70/99    0.4995    0.6084     1.146:  50%|█████     | 1/2 [00:00<00:00,  2.     70/99    0.4995    0.6084     1.146: 100%|██████████| 2/2 [00:00<00:00,  2.     70/99    0.4995    0.6084     1.146: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                71/99    0.5198    0.5928     1.088:   0%|          | 0/2 [00:00<?, ?it/s]      71/99    0.5198    0.5928     1.088:  50%|█████     | 1/2 [00:00<00:00,  2.     71/99    0.4948    0.5942      1.12:  50%|█████     | 1/2 [00:00<00:00,  2.     71/99    0.4948    0.5942      1.12: 100%|██████████| 2/2 [00:00<00:00,  2.     71/99    0.4948    0.5942      1.12: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.22s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.23s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.17s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.19s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 71 | mAP@0.5: 0.35411559434289236 | mAP@0.50:0.95: 0.1770870763988818
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.35s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.94s).
+Accumulating evaluation results...
+DONE (t=0.34s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.177
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.354
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.173
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.036
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.154
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.234
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.180
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.410
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.542
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.411
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.498
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.572
+  0%|          | 0/2 [00:00<?, ?it/s]                                                72/99    0.4886    0.5734     1.073:   0%|          | 0/2 [00:00<?, ?it/s]      72/99    0.4886    0.5734     1.073:  50%|█████     | 1/2 [00:00<00:00,  2.     72/99    0.5266    0.5947     1.144:  50%|█████     | 1/2 [00:00<00:00,  2.     72/99    0.5266    0.5947     1.144: 100%|██████████| 2/2 [00:00<00:00,  2.     72/99    0.5266    0.5947     1.144: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                73/99    0.4967    0.6058     1.125:   0%|          | 0/2 [00:00<?, ?it/s]      73/99    0.4967    0.6058     1.125:  50%|█████     | 1/2 [00:00<00:00,  2.     73/99    0.5322    0.6238     1.131:  50%|█████     | 1/2 [00:00<00:00,  2.     73/99    0.5322    0.6238     1.131: 100%|██████████| 2/2 [00:00<00:00,  2.     73/99    0.5322    0.6238     1.131: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                74/99    0.5334    0.6024     1.129:   0%|          | 0/2 [00:00<?, ?it/s]      74/99    0.5334    0.6024     1.129:  50%|█████     | 1/2 [00:00<00:00,  2.     74/99    0.5223    0.5963     1.166:  50%|█████     | 1/2 [00:00<00:00,  2.     74/99    0.5223    0.5963     1.166: 100%|██████████| 2/2 [00:00<00:00,  2.     74/99    0.5223    0.5963     1.166: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.22s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.26s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.16s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.18s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 74 | mAP@0.5: 0.36608284732610585 | mAP@0.50:0.95: 0.18187768766544346
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.36s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.96s).
+Accumulating evaluation results...
+DONE (t=0.34s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.182
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.366
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.178
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.039
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.156
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.239
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.184
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.416
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.543
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.411
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.490
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.571
+  0%|          | 0/2 [00:00<?, ?it/s]                                                75/99    0.4996    0.5712     1.105:   0%|          | 0/2 [00:00<?, ?it/s]      75/99    0.4996    0.5712     1.105:  50%|█████     | 1/2 [00:00<00:00,  2.     75/99    0.5278    0.6006     1.129:  50%|█████     | 1/2 [00:00<00:00,  2.     75/99    0.5278    0.6006     1.129: 100%|██████████| 2/2 [00:00<00:00,  2.     75/99    0.5278    0.6006     1.129: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                76/99    0.4821    0.5925     1.169:   0%|          | 0/2 [00:00<?, ?it/s]      76/99    0.4821    0.5925     1.169:  50%|█████     | 1/2 [00:00<00:00,  2.     76/99    0.5079    0.6028     1.133:  50%|█████     | 1/2 [00:00<00:00,  2.     76/99    0.5079    0.6028     1.133: 100%|██████████| 2/2 [00:00<00:00,  2.     76/99    0.5079    0.6028     1.133: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                77/99     0.507     0.583     1.065:   0%|          | 0/2 [00:00<?, ?it/s]      77/99     0.507     0.583     1.065:  50%|█████     | 1/2 [00:00<00:00,  2.     77/99    0.5131    0.6017     1.136:  50%|█████     | 1/2 [00:00<00:00,  2.     77/99    0.5131    0.6017     1.136: 100%|██████████| 2/2 [00:00<00:00,  2.     77/99    0.5131    0.6017     1.136: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.24s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.23s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.17s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.19s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 77 | mAP@0.5: 0.36716186520976335 | mAP@0.50:0.95: 0.18317041942112722
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.36s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.94s).
+Accumulating evaluation results...
+DONE (t=0.34s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.183
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.367
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.177
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.042
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.157
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.239
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.180
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.411
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.543
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.411
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.497
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.569
+  0%|          | 0/2 [00:00<?, ?it/s]                                                78/99    0.5622    0.5943     1.118:   0%|          | 0/2 [00:00<?, ?it/s]      78/99    0.5622    0.5943     1.118:  50%|█████     | 1/2 [00:00<00:00,  2.     78/99    0.5215    0.5866     1.108:  50%|█████     | 1/2 [00:00<00:00,  2.     78/99    0.5215    0.5866     1.108: 100%|██████████| 2/2 [00:00<00:00,  2.     78/99    0.5215    0.5866     1.108: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                79/99    0.5326     0.604     1.134:   0%|          | 0/2 [00:00<?, ?it/s]      79/99    0.5326     0.604     1.134:  50%|█████     | 1/2 [00:00<00:00,  1.     79/99    0.5262    0.6017     1.156:  50%|█████     | 1/2 [00:00<00:00,  1.     79/99    0.5262    0.6017     1.156: 100%|██████████| 2/2 [00:00<00:00,  2.     79/99    0.5262    0.6017     1.156: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                80/99    0.5071    0.6034     1.168:   0%|          | 0/2 [00:00<?, ?it/s]      80/99    0.5071    0.6034     1.168:  50%|█████     | 1/2 [00:00<00:00,  2.     80/99    0.5045    0.5963     1.142:  50%|█████     | 1/2 [00:00<00:00,  2.     80/99    0.5045    0.5963     1.142: 100%|██████████| 2/2 [00:00<00:00,  2.     80/99    0.5045    0.5963     1.142: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.22s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.26s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.16s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.19s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 80 | mAP@0.5: 0.38314563267657886 | mAP@0.50:0.95: 0.1921449370807892
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.35s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.94s).
+Accumulating evaluation results...
+DONE (t=0.34s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.192
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.383
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.186
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.044
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.161
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.251
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.188
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.424
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.549
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.417
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.491
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.583
+  0%|          | 0/2 [00:00<?, ?it/s]                                                81/99    0.5407    0.5983     1.162:   0%|          | 0/2 [00:00<?, ?it/s]      81/99    0.5407    0.5983     1.162:  50%|█████     | 1/2 [00:00<00:00,  2.     81/99    0.5436    0.5947     1.126:  50%|█████     | 1/2 [00:00<00:00,  2.     81/99    0.5436    0.5947     1.126: 100%|██████████| 2/2 [00:00<00:00,  2.     81/99    0.5436    0.5947     1.126: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                82/99     0.504    0.5689     1.115:   0%|          | 0/2 [00:00<?, ?it/s]      82/99     0.504    0.5689     1.115:  50%|█████     | 1/2 [00:00<00:00,  2.     82/99    0.5105    0.5787     1.124:  50%|█████     | 1/2 [00:00<00:00,  2.     82/99    0.5105    0.5787     1.124: 100%|██████████| 2/2 [00:00<00:00,  2.     82/99    0.5105    0.5787     1.124: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                83/99    0.5288    0.6131     1.166:   0%|          | 0/2 [00:00<?, ?it/s]      83/99    0.5288    0.6131     1.166:  50%|█████     | 1/2 [00:00<00:00,  2.     83/99    0.5257    0.6049     1.138:  50%|█████     | 1/2 [00:00<00:00,  2.     83/99    0.5257    0.6049     1.138: 100%|██████████| 2/2 [00:00<00:00,  2.     83/99    0.5257    0.6049     1.138: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.26s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.25s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.18s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.20s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 83 | mAP@0.5: 0.39300261527995006 | mAP@0.50:0.95: 0.19758128501823946
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.35s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.97s).
+Accumulating evaluation results...
+DONE (t=0.34s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.198
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.393
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.194
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.041
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.162
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.256
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.196
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.432
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.558
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.417
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.495
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.587
+  0%|          | 0/2 [00:00<?, ?it/s]                                                84/99    0.5719     0.631     1.136:   0%|          | 0/2 [00:00<?, ?it/s]      84/99    0.5719     0.631     1.136:  50%|█████     | 1/2 [00:00<00:00,  2.     84/99    0.5373    0.5944     1.106:  50%|█████     | 1/2 [00:00<00:00,  2.     84/99    0.5373    0.5944     1.106: 100%|██████████| 2/2 [00:00<00:00,  2.     84/99    0.5373    0.5944     1.106: 100%|██████████| 2/2 [00:00<00:00,  2.
+Train: Final numbers of valid images: 60/ labels: 60. 
+0.0s for dataset initialization.
+/gpfs/scratch/rayen/NEU_DET_YOLOV63/ENV/lib/python3.8/site-packages/torch/utils/data/dataloader.py:554: UserWarning: This DataLoader will create 8 worker processes in total. Our suggested max number of worker in current system is 1, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(_create_warning_msg(
+Convert to COCO format
+  0%|          | 0/180 [00:00<?, ?it/s]100%|██████████| 180/180 [00:00<00:00, 112330.71it/s]
+Convert to COCO format finished. Resutls saved in /gpfs/scratch/rayen/NEU_DET_YOLOV63/aug-fs-metatrain/annotations/instances_validation.json
+Val: Final numbers of valid images: 180/ labels: 180. 
+0.1s for dataset initialization.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                85/99    0.4455    0.5994     1.164:   0%|          | 0/2 [00:01<?, ?it/s]      85/99    0.4455    0.5994     1.164:  50%|█████     | 1/2 [00:01<00:01,  1.     85/99    0.4841    0.6336     1.186:  50%|█████     | 1/2 [00:02<00:01,  1.     85/99    0.4841    0.6336     1.186: 100%|██████████| 2/2 [00:02<00:00,  1.     85/99    0.4841    0.6336     1.186: 100%|██████████| 2/2 [00:02<00:00,  1.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                86/99    0.4519    0.5815     1.124:   0%|          | 0/2 [00:00<?, ?it/s]      86/99    0.4519    0.5815     1.124:  50%|█████     | 1/2 [00:00<00:00,  2.     86/99    0.4653    0.6083     1.153:  50%|█████     | 1/2 [00:00<00:00,  2.     86/99    0.4653    0.6083     1.153: 100%|██████████| 2/2 [00:00<00:00,  2.     86/99    0.4653    0.6083     1.153: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.22s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.26s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.16s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.18s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 86 | mAP@0.5: 0.4044087535711727 | mAP@0.50:0.95: 0.20954332552887825
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.33s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.95s).
+Accumulating evaluation results...
+DONE (t=0.46s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.210
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.404
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.205
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.045
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.164
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.268
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.199
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.439
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.567
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.411
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.543
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.597
+  0%|          | 0/2 [00:00<?, ?it/s]                                                87/99    0.5123    0.6268     1.201:   0%|          | 0/2 [00:00<?, ?it/s]      87/99    0.5123    0.6268     1.201:  50%|█████     | 1/2 [00:00<00:00,  2.     87/99    0.4851     0.629     1.193:  50%|█████     | 1/2 [00:00<00:00,  2.     87/99    0.4851     0.629     1.193: 100%|██████████| 2/2 [00:00<00:00,  2.     87/99    0.4851     0.629     1.193: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                88/99    0.4793    0.6489     1.103:   0%|          | 0/2 [00:00<?, ?it/s]      88/99    0.4793    0.6489     1.103:  50%|█████     | 1/2 [00:00<00:00,  2.     88/99    0.4811    0.6147     1.131:  50%|█████     | 1/2 [00:00<00:00,  2.     88/99    0.4811    0.6147     1.131: 100%|██████████| 2/2 [00:00<00:00,  2.     88/99    0.4811    0.6147     1.131: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                89/99    0.4647    0.6375     1.187:   0%|          | 0/2 [00:00<?, ?it/s]      89/99    0.4647    0.6375     1.187:  50%|█████     | 1/2 [00:00<00:00,  2.     89/99    0.4956    0.6301      1.13:  50%|█████     | 1/2 [00:00<00:00,  2.     89/99    0.4956    0.6301      1.13: 100%|██████████| 2/2 [00:00<00:00,  2.     89/99    0.4956    0.6301      1.13: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.27s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.24s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.15s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.18s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 89 | mAP@0.5: 0.4215687408770204 | mAP@0.50:0.95: 0.21772780542770745
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.43s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.94s).
+Accumulating evaluation results...
+DONE (t=0.33s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.218
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.422
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.210
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.045
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.164
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.277
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.209
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.438
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.562
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.417
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.547
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.590
+  0%|          | 0/2 [00:00<?, ?it/s]                                                90/99    0.5051    0.6526      1.07:   0%|          | 0/2 [00:00<?, ?it/s]      90/99    0.5051    0.6526      1.07:  50%|█████     | 1/2 [00:00<00:00,  2.     90/99    0.5297    0.6599     1.078:  50%|█████     | 1/2 [00:00<00:00,  2.     90/99    0.5297    0.6599     1.078: 100%|██████████| 2/2 [00:00<00:00,  2.     90/99    0.5297    0.6599     1.078: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                91/99    0.5128    0.6208     1.074:   0%|          | 0/2 [00:00<?, ?it/s]      91/99    0.5128    0.6208     1.074:  50%|█████     | 1/2 [00:00<00:00,  2.     91/99    0.4886    0.6033     1.041:  50%|█████     | 1/2 [00:00<00:00,  2.     91/99    0.4886    0.6033     1.041: 100%|██████████| 2/2 [00:00<00:00,  2.     91/99    0.4886    0.6033     1.041: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                92/99    0.4527    0.5779     1.044:   0%|          | 0/2 [00:00<?, ?it/s]      92/99    0.4527    0.5779     1.044:  50%|█████     | 1/2 [00:00<00:00,  2.     92/99    0.5525    0.6391     1.083:  50%|█████     | 1/2 [00:00<00:00,  2.     92/99    0.5525    0.6391     1.083: 100%|██████████| 2/2 [00:00<00:00,  2.     92/99    0.5525    0.6391     1.083: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.24s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.23s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.17s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.19s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 92 | mAP@0.5: 0.43415150882464837 | mAP@0.50:0.95: 0.2247627281268797
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.36s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.97s).
+Accumulating evaluation results...
+DONE (t=0.33s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.225
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.434
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.213
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.045
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.168
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.281
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.212
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.440
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.567
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.417
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.530
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.599
+  0%|          | 0/2 [00:00<?, ?it/s]                                                93/99    0.4432    0.5657     1.054:   0%|          | 0/2 [00:00<?, ?it/s]      93/99    0.4432    0.5657     1.054:  50%|█████     | 1/2 [00:00<00:00,  2.     93/99    0.4835    0.6001     1.096:  50%|█████     | 1/2 [00:00<00:00,  2.     93/99    0.4835    0.6001     1.096: 100%|██████████| 2/2 [00:00<00:00,  2.     93/99    0.4835    0.6001     1.096: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                94/99    0.4605    0.5705     1.003:   0%|          | 0/2 [00:00<?, ?it/s]      94/99    0.4605    0.5705     1.003:  50%|█████     | 1/2 [00:00<00:00,  2.     94/99    0.4506    0.5921     1.092:  50%|█████     | 1/2 [00:00<00:00,  2.     94/99    0.4506    0.5921     1.092: 100%|██████████| 2/2 [00:00<00:00,  2.     94/99    0.4506    0.5921     1.092: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                95/99    0.4711     0.578    0.9828:   0%|          | 0/2 [00:00<?, ?it/s]      95/99    0.4711     0.578    0.9828:  50%|█████     | 1/2 [00:00<00:00,  2.     95/99    0.4566    0.5811     1.043:  50%|█████     | 1/2 [00:00<00:00,  2.     95/99    0.4566    0.5811     1.043: 100%|██████████| 2/2 [00:00<00:00,  2.     95/99    0.4566    0.5811     1.043: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.29s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.27s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.17s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.20s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 95 | mAP@0.5: 0.4442446513744803 | mAP@0.50:0.95: 0.23124725874503144
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.34s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=1.08s).
+Accumulating evaluation results...
+DONE (t=0.34s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.231
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.444
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.220
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.047
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.167
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.290
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.217
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.442
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.574
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.578
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.538
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.607
+  0%|          | 0/2 [00:00<?, ?it/s]                                                96/99    0.4751      0.58     1.042:   0%|          | 0/2 [00:00<?, ?it/s]      96/99    0.4751      0.58     1.042:  50%|█████     | 1/2 [00:00<00:00,  2.     96/99    0.4776    0.5992     1.053:  50%|█████     | 1/2 [00:00<00:00,  2.     96/99    0.4776    0.5992     1.053: 100%|██████████| 2/2 [00:00<00:00,  2.     96/99    0.4776    0.5992     1.053: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                97/99    0.4577    0.6151     1.115:   0%|          | 0/2 [00:00<?, ?it/s]      97/99    0.4577    0.6151     1.115:  50%|█████     | 1/2 [00:00<00:00,  2.     97/99    0.4422    0.6001     1.117:  50%|█████     | 1/2 [00:00<00:00,  2.     97/99    0.4422    0.6001     1.117: 100%|██████████| 2/2 [00:00<00:00,  2.     97/99    0.4422    0.6001     1.117: 100%|██████████| 2/2 [00:00<00:00,  2.
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+  0%|          | 0/2 [00:00<?, ?it/s]                                                98/99    0.4537    0.5735    0.9942:   0%|          | 0/2 [00:00<?, ?it/s]      98/99    0.4537    0.5735    0.9942:  50%|█████     | 1/2 [00:00<00:00,  2.     98/99    0.4962    0.6165     1.027:  50%|█████     | 1/2 [00:00<00:00,  2.     98/99    0.4962    0.6165     1.027: 100%|██████████| 2/2 [00:00<00:00,  2.     98/99    0.4962    0.6165     1.027: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.29s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.28s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.20s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.22s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 98 | mAP@0.5: 0.4598037971767204 | mAP@0.50:0.95: 0.23943154722386692
+
+     Epoch  iou_loss  dfl_loss  cls_loss
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.37s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.97s).
+Accumulating evaluation results...
+DONE (t=0.33s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.239
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.460
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.224
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.046
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.167
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.301
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.221
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.446
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.574
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.572
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.531
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.613
+  0%|          | 0/2 [00:00<?, ?it/s]                                                99/99    0.4554    0.5983      1.07:   0%|          | 0/2 [00:00<?, ?it/s]      99/99    0.4554    0.5983      1.07:  50%|█████     | 1/2 [00:00<00:00,  2.     99/99     0.462    0.6018     1.046:  50%|█████     | 1/2 [00:00<00:00,  2.     99/99     0.462    0.6018     1.046: 100%|██████████| 2/2 [00:00<00:00,  2.     99/99     0.462    0.6018     1.046: 100%|██████████| 2/2 [00:00<00:00,  2.
+Inferencing model in train datasets.:   0%|               | 0/3 [00:00<?, ?it/s]Inferencing model in train datasets.:  33%|██▎    | 1/3 [00:01<00:02,  1.25s/it]Inferencing model in train datasets.:  67%|████▋  | 2/3 [00:02<00:01,  1.24s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.19s/it]Inferencing model in train datasets.: 100%|███████| 3/3 [00:03<00:00,  1.20s/it]
+
+Evaluating speed.
+
+Evaluating mAP by pycocotools.
+Saving results/train_6l6-fs-32-320/predictions.json...
+Results saved to results/train_6l6-fs-32-320
+Epoch: 99 | mAP@0.5: 0.46038984732698307 | mAP@0.50:0.95: 0.2409444156327796
+
+Training completed in 0.142 hours.
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.37s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=1.00s).
+Accumulating evaluation results...
+DONE (t=0.35s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.241
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.460
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.230
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.046
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.169
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.299
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.226
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.450
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.577
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.572
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.537
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.614
+Namespace(batch_size=32, conf_thres=0.03, config_file='', data='aug-fs-metatrain/neu_det.yaml', device='0', do_coco_metric=True, do_pr_metric=True, eval_config_file='./configs/experiment/eval_640_repro.py', half=False, img_size=320, infer_on_rect=True, iou_thres=0.65, name='eval_train_6l6-fs-32-320', plot_confusion_matrix=True, plot_curve=True, reproduce_640_eval=False, save_dir='results', shrink_size=0, task='val', verbose=True, weights='results/train_6l6-fs-32-320/weights/best_ckpt.pt')
+Loading checkpoint from results/train_6l6-fs-32-320/weights/best_ckpt.pt
+
+Fusing model...
+/gpfs/scratch/rayen/NEU_DET_YOLOV63/ENV/lib/python3.8/site-packages/torch/functional.py:504: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at /home/coulombc/wheels_builder/tmp.17382/python-3.8/torch/aten/src/ATen/native/TensorShape.cpp:3190.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+Switch model to deploy modality.
+Model Summary: Params: 140.21M, Gflops: 42.03
+Val: Checking formats of labels with 8 process(es): 
+  0%|          | 0/180 [00:00<?, ?it/s]180 label(s) found, 0 label(s) missing, 0 label(s) empty, 0 invalid label files: 100%|██████████| 180/180 [00:00<00:00, 190987.79it/s]
+Convert to COCO format
+  0%|          | 0/180 [00:00<?, ?it/s]100%|██████████| 180/180 [00:00<00:00, 36578.23it/s]
+Convert to COCO format finished. Resutls saved in /gpfs/scratch/rayen/NEU_DET_YOLOV63/aug-fs-metatrain/annotations/instances_validation.json
+Val: Final numbers of valid images: 180/ labels: 180. 
+0.5s for dataset initialization.
+/gpfs/scratch/rayen/NEU_DET_YOLOV63/ENV/lib/python3.8/site-packages/torch/utils/data/dataloader.py:554: UserWarning: This DataLoader will create 8 worker processes in total. Our suggested max number of worker in current system is 1, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(_create_warning_msg(
+Inferencing model in val datasets.:   0%|                 | 0/6 [00:00<?, ?it/s]Inferencing model in val datasets.:  17%|█▌       | 1/6 [00:01<00:09,  1.86s/it]Inferencing model in val datasets.:  33%|███      | 2/6 [00:02<00:04,  1.14s/it]Inferencing model in val datasets.:  50%|████▌    | 3/6 [00:03<00:02,  1.07it/s]Inferencing model in val datasets.:  67%|██████   | 4/6 [00:03<00:01,  1.23it/s]Inferencing model in val datasets.:  83%|███████▌ | 5/6 [00:04<00:00,  1.33it/s]Inferencing model in val datasets.: 100%|█████████| 6/6 [00:04<00:00,  1.57it/s]Inferencing model in val datasets.: 100%|█████████| 6/6 [00:04<00:00,  1.23it/s]
+IOU 50 best mF1 thershold near 0.353.
+Class                 Images      Labels     P@.5iou     R@.5iou    F1@.5iou      mAP@.5  mAP@.5:.95
+all                      180         399       0.401       0.435       0.412        0.46        0.24
+pitted_surface           180          88       0.593         0.5       0.542         0.5       0.265
+crazing                  180         148           0           0           0       0.113      0.0361
+patches                  180         163       0.611       0.804       0.695       0.768        0.42
+
+Evaluating speed.
+Average pre-process time: 0.03 ms
+Average inference time: 3.27 ms
+Average NMS time: 1.01 ms
+
+Evaluating mAP by pycocotools.
+Saving results/eval_train_6l6-fs-32-320/predictions.json...
+Class           Labeled_images      Labels     P@.5iou     R@.5iou    F1@.5iou      mAP@.5  mAP@.5:.95
+all                      180         399       0.518        0.52       0.519       0.461       0.241
+pitted_surface            60          88       0.595         0.5       0.543         0.5       0.267
+crazing                   60         148       0.192        0.29       0.231       0.116      0.0368
+patches                   65         163       0.747        0.74       0.743       0.766       0.419
+Results saved to results/eval_train_6l6-fs-32-320
+WARNING: ConfusionMatrix plot failure: No module named 'seaborn'
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.45s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.99s).
+Accumulating evaluation results...
+DONE (t=0.34s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.241
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.461
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.231
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.046
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.168
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.300
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.229
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.450
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.576
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.572
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.538
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.612

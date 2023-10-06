@@ -1,0 +1,26 @@
+
+Lmod is automatically replacing "intel/2020.1.217" with "gcc/9.3.0".
+
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) libfabric/1.10.1     2) openmpi/4.0.3     3) ucx/1.8.0
+
+Using 1 GPU for training... 
+training args are: Namespace(batch_size=32, bs_per_gpu=32, calib=False, check_images=False, check_labels=False, conf_file='configs/yolov6l6_finetune.py', data_path='data/neu_det.yaml', device='0', dist_url='env://', distill=False, distill_feat=False, epochs=100, eval_final_only=False, eval_interval=20, fuse_ab=False, gpu_count=0, heavy_eval_range=50, img_size=320, local_rank=-1, name='train_6l6-32-320', output_dir='results', quant=False, rank=-1, resume=False, save_ckpt_on_last_n_epoch=-1, save_dir='results/train_6l6-32-32016', stop_aug_last_n_epoch=15, teacher_model_path=None, temperature=20, workers=8, world_size=1, write_trainbatch_tb=False)
+
+Traceback (most recent call last):
+  File "tools/train.py", line 128, in <module>
+    main(args)
+  File "tools/train.py", line 113, in main
+    trainer = Trainer(args, cfg, device)
+  File "/gpfs/scratch/rayen/NEU_DET_YOLOV63/yolov6/core/engine.py", line 54, in __init__
+    self.train_loader, self.val_loader = self.get_data_loader(args, cfg, self.data_dict)
+  File "/gpfs/scratch/rayen/NEU_DET_YOLOV63/yolov6/core/engine.py", line 370, in get_data_loader
+    train_loader = create_dataloader(train_path, args.img_size, args.batch_size // args.world_size, grid_size,
+  File "/gpfs/scratch/rayen/NEU_DET_YOLOV63/yolov6/data/data_load.py", line 41, in create_dataloader
+    dataset = TrainValDataset(
+  File "/gpfs/scratch/rayen/NEU_DET_YOLOV63/yolov6/data/datasets.py", line 68, in __init__
+    self.img_paths, self.labels = self.get_imgs_labels(self.img_dir)
+  File "/gpfs/scratch/rayen/NEU_DET_YOLOV63/yolov6/data/datasets.py", line 281, in get_imgs_labels
+    assert "labels" in sub_dirs, f"Could not find a labels directory!"
+AssertionError: Could not find a labels directory!

@@ -1,0 +1,13 @@
+
+Lmod is automatically replacing "intel/2020.1.217" with "gcc/9.3.0".
+
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) libfabric/1.10.1     2) openmpi/4.0.3     3) ucx/1.8.0
+
+Traceback (most recent call last):
+  File "tools/train.py", line 17, in <module>
+    from yolov6.core.engine import Trainer
+  File "/gpfs/scratch/rayen/NEU_DET_YOLOV63/yolov6/core/engine.py", line 9, in <module>
+    from tqdm import tqdm
+ModuleNotFoundError: No module named 'tqdm'
